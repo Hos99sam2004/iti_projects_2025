@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iti_projects/myapps/news/Const.dart';
+import 'package:iti_projects/myapps/news/Screen.dart';
 
 class Counter extends StatefulWidget {
   const Counter({super.key});
@@ -13,6 +15,7 @@ class Counter extends StatefulWidget {
 class _CounterState extends State<Counter> {
   int counter = 0;
   int root = 0;
+  Api api = Api();
   bool isvalid = false;
   @override
   Widget build(BuildContext context) {
@@ -32,11 +35,12 @@ class _CounterState extends State<Counter> {
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(40.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(height: 40),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -65,7 +69,14 @@ class _CounterState extends State<Counter> {
                     SizedBox(width: 20),
                     IconButton(
                       icon: Icon(Icons.settings, color: Colors.white, size: 30),
-                      onPressed: () {},
+                      onPressed: () async {
+                         await api.GetData();
+                        print("${api.GetData()}");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Screen()),
+                        ); // Navigate to the settings page when the button is pressed'/settings');
+                      },
                     ),
                     SizedBox(width: 20),
                     IconButton(
