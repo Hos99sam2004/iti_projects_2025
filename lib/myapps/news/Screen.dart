@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iti_projects/myapps/news/Const.dart';
+import 'package:iti_projects/myapps/news/catagory.dart' show CatagoryScreen;
 
 class Screen extends StatefulWidget {
   const Screen({super.key});
@@ -85,10 +86,16 @@ class _ScreenState extends State<Screen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          loadData();
-                          setState(() {});
-                          
-                        },
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => CatagoryScreen(
+        category: categories[index]["title"]!, // 👈 نبعت العنوان بدل index
+      ),
+    ),
+  );
+},
+
                         child: Card(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -99,8 +106,11 @@ class _ScreenState extends State<Screen> {
                                   child: Image.network(
                                     categories[index]["image"]!,
                                     fit: BoxFit.fill,
-                                    errorBuilder: (context, error, stackTrace) =>
-                                        Icon(Icons.image_not_supported, size: 30),
+                                    errorBuilder:
+                                        (context, error, stackTrace) => Icon(
+                                          Icons.image_not_supported,
+                                          size: 30,
+                                        ),
                                   ),
                                 ),
                               ),
